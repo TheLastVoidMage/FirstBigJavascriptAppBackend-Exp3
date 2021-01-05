@@ -9,8 +9,6 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
   console.log('a user connected with socket id ' + socket.id);
-  //console.log(socket.id);
-  //console.log(socket.client.conn.server);
   io.emit('connect-count', socket.client.conn.server.clientsCount);
   io.emit('connect-user', {"socketId": socket.id});
 
