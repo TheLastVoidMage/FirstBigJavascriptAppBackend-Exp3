@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/js/all.min.js'></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+  
+  <!-- Main Section Heading -->
+  <section class="section">
+    <div class="container">
+      <h1 class="title">
+        Hello World
+      </h1>
+      <p class="subtitle">
+        My first website with <strong>Bulma</strong>!
+      </p>
+      <p class="subtitle">
+        There are <strong id="people-connected">0</strong> people connected!
+      </p>
+    </div>
+  </section>
+
+
+  <div class="columns m-5">
+    
+    <div class="column">
+    
+      <!-- Form -->
+      <div class="tabs">
+        <ul>
+          <li class="is-active"><a onclick="$('form').show(); $('#chart').hide()">Form</a></li>
+          <li><a onclick="$('form').hide(); $('#chart').show()">Chart</a></li>
+        </ul>
+      </div>
+
+      <form>
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input id="form-user-full-name" class="input" type="text" placeholder="Text input">
+        </div>
+      </div>
+      <div class="field">
+      <label class="label">Username</label>
+      <div class="control has-icons-left has-icons-right">
+        <input id="form-user-short-name" class="input is-success" type="text" placeholder="Text input" value="bulma">
+        <span class="icon is-small is-left">
+          <i class="fas fa-user"></i>
+        </span>
+        <span class="icon is-small is-right">
+          <i class="fas fa-check"></i>
+        </span>
+      </div>
+      <p class="help is-success">This username is available</p>
+      </div>
+
+      <div class="field">
+        <label class="label">Message</label>
+        <div class="control">
+          <textarea id="form-user-message" class="textarea" placeholder="Textarea"></textarea>
+        </div>
+      </div>
+
+      <input id="form-user-favorite-number" type="number" min="0" max="10" />
+      <input id="form-user-favorite-color" type="color" />
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-link">Submit</button>
+        </div>
+        <div class="control">
+          <button class="button is-link is-light">Cancel</button>
+        </div>
+      </div>
+      </form>
+
+      <div id="chart">
+        <div class="wrapper"><canvas id="chart-0"></canvas></div>
+        <div class="toolbar">
+          <button onclick="randomize(this)">Randomize</button>
+          <button onclick="addDataset(this)">Add Dataset</button>
+          <button onclick="removeDataset(this)">Remove Dataset</button>
+        </div>
+	    </div>
+
+    </div>
+    
+    <div class="column" id="user-list">
+      
+      <h3 id="user-typing-status"></h3>
+
+      <!-- User Cards -->
+      <div class="box">
+      <article class="media">
+        <div class="media-left">
+          <figure id="card-user-favorite-color-1" class="image is-64x64">
+            <!--<img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">-->
+          </figure>
+        </div>
+        <div class="media-content">
+          <div class="content">
+            <p>
+              <strong>John Smith</strong> <small>@johnsmith</small> <em>31m</em>
+              <br>
+              <span>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+              </span>
+            </p>
+          </div>
+            <div class="icon has-text-info is-hidden">
+              <i class="fas fa-spinner fa-pulse"></i>
+            </div>
+        </div>
+      </article>
+      </div>
+
+      
+
+    </div>
+
+    
+
+</div>
+
+
+
+
+
+	<script>
+		var DATA_COUNT = 6;
+
+		var data = {
+			labels: ['user1'],
+			datasets: [{
+				data: [0]
+			}]
+		};
+
+		var options = {
+			legend: false,
+			tooltips: false,
+      scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
+			elements: {
+				rectangle: {
+					backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+					borderWidth: 1
+				}
+			}
+		};
+
+		var chart = new Chart('chart-0', {
+			type: 'bar',
+			data: data,
+			options: options
+		});
+
+
+		function addDataset() {
+			chart.data.datasets.push({
+				data: [Math.random()*10+1,Math.random()*10+1,Math.random()*10+1,Math.random()*10+1,Math.random()*10+1,Math.random()*10+1]
+			});
+			chart.update();
+		}
+
+		// eslint-disable-next-line no-unused-vars
+		function removeDataset() {
+			chart.data.datasets.shift();
+			chart.update();
+		}
+
+    function randomize() {
+        chart.data.datasets[0] = {"data":[Math.random() * 10 + 1]};
+        chart.update();
+    }
+
+    
+
+	</script>
+
+
+   <!-- Socket.IO hookup -->
+  <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  
+
+  <script>
+    $(function () {
+      var socket = io();
+
+      $('#chart').hide()
+      
+      $('form').submit((e) => {
+        e.preventDefault(); // prevents page reloading
+        
+        // Get form values
+        let userFullName = $('#form-user-full-name').val();
+        let userShortName = $('#form-user-short-name').val();
+        let userMessage = $('#form-user-message').val();
+        let userFavoriteNumber = $('#form-user-favorite-number').val();
+        let userFavoriteColor = $('#form-user-favorite-color').val();
+        
+        // Update user card
+        //const user-card = $(`.box[data-socket-id="${socket.id}"`);
+        //user-card.find('strong').text(userFullName);
+        //user-card.find('small').text(userShortName);
+        //user-card.find('em').text(userFavoriteNumber);
+        //user-card.find('span').text(userMessage);
+ 
+        //$('#card-user-full-name-1').text(userFullName);
+        //$('#card-user-short-name-1').text(userShortName);
+        //$('#card-user-message-1').text(userMessage);
+        //$('#card-user-favorite-number-1').text(userFavoriteNumber);
+        //$('#card-user-favorite-color-1').css('background-color', userFavoriteColor);
+
+        // Form the JSON data
+        let jsonData = {
+          "socketId": socket.id,
+          "userFullName": userFullName,
+          "userShortName": userShortName,
+          "userMessage": userMessage,
+          "userFavoriteNumber": userFavoriteNumber,
+          "userFavoriteColor": userFavoriteColor
+        }
+       
+        // Emit jsonData to all
+        socket.emit('user-update', jsonData);
+
+        return false;
+      });
+
+      socket.on('chat message', function(msg){
+        $('#messages').append($('<li>').text(msg));
+      });
+
+      socket.on('user-update', function(jsonData) {
+        
+        // Update user card
+        //$('#card-user-full-name-1').text(jsonData.userFullName);
+        //$('#card-user-short-name-1').text(jsonData.userShortName);
+        //$('#card-user-message-1').text(jsonData.userMessage);
+        //$('#card-user-favorite-number-1').text(jsonData.userFavoriteNumber);
+        //$('#card-user-favorite-color-1').css('background-color', jsonData.userFavoriteColor);
+      
+        // Update user card
+        let userCard = $(`.box[data-socket-id="${jsonData.socketId}"]`);
+        
+        if (!userCard.length) {
+          console.log('Making a box');
+          userCard = $('.box').first().clone();
+          userCard.attr('data-socket-id', jsonData.socketId).appendTo('#user-list');
+        }
+
+        userCard.find('strong').text(jsonData.userFullName);
+        userCard.find('small').text(jsonData.userShortName);
+        userCard.find('em').text(jsonData.userFavoriteNumber);
+        userCard.find('span').text(jsonData.userMessage);
+        userCard.find('figure').css('background-color', jsonData.userFavoriteColor);
+
+        chart.data.datasets.push({
+				  data: [jsonData.userFavoriteNumber],
+          backgroundColor: [jsonData.userFavoriteColor]
+			  });
+			  chart.update();
+
+      });
+
+      socket.on('user-typing', function(jsonData){      
+        $('#user-typing-status').text(jsonData.socketId);
+
+        // Update user card
+        let userCard = $(`.box[data-socket-id="${jsonData.socketId}"]`);
+
+        if (userCard) {
+          userCard.find('div.icon').removeClass('is-hidden');
+          setTimeout(function() {
+            userCard.find('div.icon').addClass('is-hidden');
+          }, 3000);
+        }
+        
+      });
+
+      socket.on('connect-count', function(count){
+        
+        // Update Count of Connection on the Site
+        console.log(count);
+        $('#people-connected').text(count);
+
+      });
+
+      socket.on('connect-user', function(jsonData){
+        
+        // Update number of user-list boxes      
+        if (jsonData.socketId !== socket.id) 
+        {
+          let newCard = $('.box').first().clone();
+          newCard.attr('data-socket-id', jsonData.socketId).appendTo('#user-list');
+        } 
+        
+      });
+
+      socket.on('disconnect-user', function(jsonData){
+        
+        // Delete user card
+        let userCard = $(`.box[data-socket-id="${jsonData.socketId}"]`);
+        userCard.slideUp('slow').remove();
+        
+      });
+
+      
+
+      socket.on("connect", () => {
+        //$('.box').first().data('socket-id', socket.id);
+        $('.box').first().attr('data-socket-id', socket.id);
+      });
+
+       const fullNameFromLocalStorage = window['localStorage'].getItem('fullName');
+
+      // Key Up Listener for Full Name Field in Form
+      $("#form-user-full-name").keyup(() => {
+        socket.emit('user-typing', { "socketId": socket.id });
+      });
+
+    });
+  </script>
+
+  
+  <script src="./eventhandlers.js"></script>
+  </body>
+</html>
