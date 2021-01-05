@@ -6,9 +6,6 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/eventhandlers.js', (req, res) => {
-  res.sendFile(__dirname + '/eventhandlers.js');
-});
 
 io.on('connection', (socket) => {
   console.log('a user connected with socket id ' + socket.id);
