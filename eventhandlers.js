@@ -1,7 +1,5 @@
 $(function () {
   var socket = io();
-
-  $('#chart').hide()
   
   $('form').submit((e) => {
     e.preventDefault(); // prevents page reloading
@@ -10,7 +8,6 @@ $(function () {
     let userFullName = $('#form-user-full-name').val();
     let userShortName = $('#form-user-short-name').val();
     let userMessage = $('#form-user-message').val();
-    let userFavoriteNumber = $('#form-user-favorite-number').val();
     let userFavoriteColor = $('#form-user-favorite-color').val();
 
     // Form the JSON data
@@ -19,7 +16,6 @@ $(function () {
       "userFullName": userFullName,
       "userShortName": userShortName,
       "userMessage": userMessage,
-      "userFavoriteNumber": userFavoriteNumber,
       "userFavoriteColor": userFavoriteColor
     }
     
@@ -53,15 +49,8 @@ $(function () {
 
     userCard.find('strong').text(jsonData.userFullName);
     userCard.find('small').text(jsonData.userShortName);
-    userCard.find('em').text(jsonData.userFavoriteNumber);
     userCard.find('span').text(jsonData.userMessage);
     userCard.find('figure').css('background-color', jsonData.userFavoriteColor);
-
-    chart.data.datasets.push({
-      data: [jsonData.userFavoriteNumber],
-      backgroundColor: [jsonData.userFavoriteColor]
-    });
-    chart.update();
 
   });
 

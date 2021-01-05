@@ -31,7 +31,6 @@
       <div class="tabs">
         <ul>
           <li class="is-active"><a onclick="$('form').show(); $('#chart').hide()">Form</a></li>
-          <li><a onclick="$('form').hide(); $('#chart').show()">Chart</a></li>
         </ul>
       </div>
 
@@ -62,8 +61,6 @@
           <textarea id="form-user-message" class="textarea" placeholder="Textarea"></textarea>
         </div>
       </div>
-
-      <input id="form-user-favorite-number" type="number" min="0" max="10" />
       <input id="form-user-favorite-color" type="color" />
 
       <div class="field is-grouped">
@@ -75,16 +72,6 @@
         </div>
       </div>
       </form>
-
-      <div id="chart">
-        <div class="wrapper"><canvas id="chart-0"></canvas></div>
-        <div class="toolbar">
-          <button onclick="randomize(this)">Randomize</button>
-          <button onclick="addDataset(this)">Add Dataset</button>
-          <button onclick="removeDataset(this)">Remove Dataset</button>
-        </div>
-	    </div>
-
     </div>
     
     <div class="column" id="user-list">
@@ -121,82 +108,6 @@
     
 
 </div>
-
-
-
-
-
-	<script>
-		var DATA_COUNT = 6;
-
-		var data = {
-			labels: ['user1'],
-			datasets: [{
-				data: [0]
-			}]
-		};
-
-		var options = {
-			legend: false,
-			tooltips: false,
-      scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        },
-			elements: {
-				rectangle: {
-					backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-					borderWidth: 1
-				}
-			}
-		};
-
-		var chart = new Chart('chart-0', {
-			type: 'bar',
-			data: data,
-			options: options
-		});
-
-
-		function addDataset() {
-			chart.data.datasets.push({
-				data: [Math.random()*10+1,Math.random()*10+1,Math.random()*10+1,Math.random()*10+1,Math.random()*10+1,Math.random()*10+1]
-			});
-			chart.update();
-		}
-
-		// eslint-disable-next-line no-unused-vars
-		function removeDataset() {
-			chart.data.datasets.shift();
-			chart.update();
-		}
-
-    function randomize() {
-        chart.data.datasets[0] = {"data":[Math.random() * 10 + 1]};
-        chart.update();
-    }
-
-    
-
-	</script>
 
 
    <!-- Socket.IO hookup -->
