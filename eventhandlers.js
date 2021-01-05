@@ -116,7 +116,7 @@ $(function () {
     
     // Delete user card
     let userCard = $(`.box[data-socket-id="${jsonData.socketId}"]`);
-    userCard.slideUp('slow').remove();
+    userCard.find('small').text("Disconnected");
     
   });
 
