@@ -12,19 +12,6 @@ $(function () {
     let userMessage = $('#form-user-message').val();
     let userFavoriteNumber = $('#form-user-favorite-number').val();
     let userFavoriteColor = $('#form-user-favorite-color').val();
-    
-    // Update user card
-    //const user-card = $(`.box[data-socket-id="${socket.id}"`);
-    //user-card.find('strong').text(userFullName);
-    //user-card.find('small').text(userShortName);
-    //user-card.find('em').text(userFavoriteNumber);
-    //user-card.find('span').text(userMessage);
-
-    //$('#card-user-full-name-1').text(userFullName);
-    //$('#card-user-short-name-1').text(userShortName);
-    //$('#card-user-message-1').text(userMessage);
-    //$('#card-user-favorite-number-1').text(userFavoriteNumber);
-    //$('#card-user-favorite-color-1').css('background-color', userFavoriteColor);
 
     // Form the JSON data
     let jsonData = {
