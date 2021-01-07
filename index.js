@@ -3,7 +3,7 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/login.html');
 });
 
 app.get('/eventhandlers.js', (req, res) => {
@@ -12,6 +12,10 @@ app.get('/eventhandlers.js', (req, res) => {
 
 app.get('/index.css', (req, res) => {
   res.sendFile(__dirname + '/index.css');
+});
+
+app.post('/index.html', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
 });
 
 io.on('connection', (socket) => {
