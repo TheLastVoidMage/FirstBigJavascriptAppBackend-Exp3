@@ -1,15 +1,29 @@
 $(function () {
   var socket = io();
-  
+  var userFullName;
+  var userShortName;
+  var userFavoriteColor;
+
+
+  function getQueryString(name){
+    let wholeString = window.location.search;
+    let shortString = wholeString.substring(wholeString.search(name) + name.length + 1);
+    let end = shortString.search('&');
+    if (end != -1)
+    {
+      shortString = shortString.substring(0,end);
+    }
+    return shortString;
+  }
+
   $('form').submit((e) => {
     e.preventDefault(); // prevents page reloading
     
     // Get form values
-    let userFullName = $('#form-user-full-name').val();
-    let userShortName = $('#form-user-short-name').val();
+    userFullName = getQueryString('display-name');
+    userShortName = getQueryString('username');
     let userMessage = $('#form-user-message').val();
-    let userFavoriteColor = $('#form-user-favorite-color').val();
-
+    userFavoriteColor = getQueryString('user-color');
     // Form the JSON data
     let jsonData = {
       "socketId": socket.id,
