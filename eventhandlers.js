@@ -44,13 +44,6 @@ $(function () {
   });
 
   socket.on('user-update', function(jsonData) {
-    
-    // Update user card
-    //$('#card-user-full-name-1').text(jsonData.userFullName);
-    //$('#card-user-short-name-1').text(jsonData.userShortName);
-    //$('#card-user-message-1').text(jsonData.userMessage);
-    //$('#card-user-favorite-number-1').text(jsonData.userFavoriteNumber);
-    //$('#card-user-favorite-color-1').css('background-color', jsonData.userFavoriteColor);
   
     // Update user card
     let userCard = $(`.box[data-socket-id="${jsonData.socketId}"]`);
