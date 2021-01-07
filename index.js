@@ -10,6 +10,10 @@ app.get('/eventhandlers.js', (req, res) => {
   res.sendFile(__dirname + '/eventhandlers.js');
 });
 
+app.get('/index.css', (req, res) => {
+  res.sendFile(__dirname + '/index.css');
+});
+
 io.on('connection', (socket) => {
   console.log('a user connected with socket id ' + socket.id);
   io.emit('connect-count', socket.client.conn.server.clientsCount);
