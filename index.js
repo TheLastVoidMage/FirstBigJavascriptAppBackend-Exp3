@@ -14,7 +14,7 @@ app.get('/index.css', (req, res) => {
   res.sendFile(__dirname + '/index.css');
 });
 
-app.post('/index.html', (req, res) => {
+app.get('/index.html', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
