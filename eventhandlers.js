@@ -4,7 +4,6 @@ $(function () {
   var userShortName;
   var userFavoriteColor;
 
-
   function getQueryString(name){
     let wholeString = window.location.search;
     let shortString = wholeString.substring(wholeString.search(name) + name.length + 1);
@@ -106,7 +105,6 @@ $(function () {
   
 
   socket.on("connect", () => {
-    //$('.box').first().data('socket-id', socket.id);
     $('.box').first().attr('data-socket-id', socket.id);
   });
 
